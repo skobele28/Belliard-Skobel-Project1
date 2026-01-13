@@ -1,7 +1,7 @@
 {
   "C_Cpp.intelliSenseEngine": "default",
   "idf.espIdfPath": "/Users/erika/esp/esp-idf",
-  "idf.pythonInstallPath": "/opt/homebrew/bin/python3.13",
+  "idf.pythonInstallPath": "C:\\Users\\abell\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
   "idf.openOcdConfigs": [
     "board/esp32s3-builtin.cfg"
   ],
