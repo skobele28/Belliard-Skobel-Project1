@@ -74,20 +74,20 @@ void app_main(void)
                 if (ignition == true){
                     gpio_set_level(SUCCESS_LED, 1);
                     gpio_set_level(READY_LED, 0);
-                    printf("\n Engine started!");
+                    printf("Engine started!\n");
                 }
             }
             else {
                 if (ignition==true){
                     gpio_set_level(ALARM_PIN, 1);
                     if (!pseat){
-                        printf("\n Passenger seat not occupied.");
+                        printf(" Passenger seat not occupied.\n");
                     }
                     if (!pbelt){
-                        printf("\n Passenger seatbelt not fastened.");
+                        printf("Passenger seatbelt not fastened.\n");
                     }
                     if (!dbelt){
-                        printf("\n Drivers seatbelt not fastened.");
+                        printf("Drivers seatbelt not fastened.\n");
                     }
                 }
             }
