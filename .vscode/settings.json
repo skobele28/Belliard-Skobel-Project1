@@ -15,5 +15,7 @@
     "--background-index",
     "--query-driver=**",
     "--compile-commands-dir=/Users/erika/esp/Belliard-Skobel-Project1/build"
-  ]
+  ],
+  "idf.flashType": "UART",
+  "idf.portWin": "COM12"
 }
