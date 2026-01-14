@@ -82,7 +82,7 @@ void app_main(void)
                 if (ignition==true && executed == 1){
                     gpio_set_level(ALARM_PIN, 1);
                     if (!pseat){
-                        printf(" Passenger seat not occupied.\n");
+                        printf("Passenger seat not occupied.\n");
                     }
                     if (!pbelt){
                         printf("Passenger seatbelt not fastened.\n");
