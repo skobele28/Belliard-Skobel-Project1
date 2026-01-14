@@ -15,10 +15,10 @@ bool pseat = false;  //Detects when the passenger is seated
 bool dbelt = false;  //Detects when the drivers seatbelt is on
 bool pbelt = false;  //Detects when the passengers seatbelt is on
 bool ignition = false; //Detects when the ignition is turned on
-bool ready_led = false; //On if true, off if false
 bool success_led = false; //On if true, off if false
 bool alarm = false; //Buzz if true, quiet if false
 int executed = 0; //keep track of print statements
+int ready_led = 0; //keep track of whether ready_led should be on or off
 
 void app_main(void)
 {
@@ -70,7 +70,10 @@ void app_main(void)
                 executed = 1;
             }
             if (pseat && dbelt && pbelt){
-                gpio_set_level(READY_LED, 1);
+                if (ready_led == 0){
+                    gpio_set_level(READY_LED, 1);
+                    ready_led = 1;
+                }
                 if (ignition == true && executed == 1){
                     gpio_set_level(SUCCESS_LED, 1);
                     gpio_set_level(READY_LED, 0);
