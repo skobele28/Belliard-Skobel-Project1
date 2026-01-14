@@ -69,14 +69,13 @@ void app_main(void)
                 printf("Welcome to enhanced alarm system model 218-W25 \n"); 
                 executed = 1;
             }
-            if (pseat && dbelt && pbelt && executed == 1){
+            if (pseat && dbelt && pbelt){
                 gpio_set_level(READY_LED, 1);
-                executed = 2;
-                if (ignition == true && executed == 2){
+            if (ignition == true && executed == 1){
                     gpio_set_level(SUCCESS_LED, 1);
                     gpio_set_level(READY_LED, 0);
                     printf("Engine started!\n");
-                    executed = 3;
+                    executed = 2;
                 }
             }
             else {
