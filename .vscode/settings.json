@@ -1,11 +1,11 @@
 {
   "C_Cpp.intelliSenseEngine": "default",
   "idf.espIdfPath": "/Users/erika/esp/esp-idf",
-  "idf.pythonInstallPath": "C:\\Users\\abell\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
+  "idf.pythonInstallPath": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
   "idf.openOcdConfigs": [
     "board/esp32s3-builtin.cfg"
   ],
-  "idf.port": "/dev/tty.usbmodem2101",
+  "idf.port": "/dev/tty.usbserial-210",
   "idf.toolsPath": "/Users/erika/.espressif",
   "idf.customExtraVars": {
     "IDF_TARGET": "esp32s3"
