@@ -99,5 +99,25 @@ void app_main(void)
                 }
             }
         }
+        else{
+            gpio_set_level(READY_LED,0);
+            ready_led = 0;
+            if (ignition==true){
+                    gpio_set_level(ALARM_PIN, 1);
+                    if (!pseat){
+                        printf("Passenger seat not occupied.\n");
+                    }
+                    if (!dseat){
+                        printf("Driver seat not occupied.\n");
+                    }
+                    if (!pbelt){
+                        printf("Passenger seatbelt not fastened.\n");
+                    }
+                    if (!dbelt){
+                        printf("Drivers seatbelt not fastened.\n");
+                    }
+                executed = 2;
+            }
+        }
     }
 }
