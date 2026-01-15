@@ -82,6 +82,8 @@ void app_main(void)
                 }
             }
             else {
+                gpio_set_level(READY_LED, 0);
+                ready_led = 0;
                 if (ignition==true && executed == 1){
                     gpio_set_level(ALARM_PIN, 1);
                     if (!pseat){
