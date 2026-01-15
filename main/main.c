@@ -15,9 +15,10 @@ bool pseat = false;  //Detects when the passenger is seated
 bool dbelt = false;  //Detects when the drivers seatbelt is on
 bool pbelt = false;  //Detects when the passengers seatbelt is on
 bool ignition = false; //Detects when the ignition is turned on
+bool success_led = false; //On if true, off if false
+bool alarm = false; //Buzz if true, quiet if false
 int executed = 0; //keep track of print statements
 int ready_led = 0; //keep track of whether ready_led should be on or off
-bool started = false; //Detects when engine is started
 
 void app_main(void)
 {
@@ -69,24 +70,15 @@ void app_main(void)
                 executed = 1;
             }
             if (pseat && dbelt && pbelt){
-                while (ready_led == 0 && !started){
-                    vTaskDelay(25 / portTICK_PERIOD_MS);
-                    if (pseat && dbelt && pbelt){
-                        gpio_set_level(READY_LED, 1);
-                        ready_led = 1;
-                    }
-                
-                    if ((ready_led == 1) && (!pseat || !dbelt || !pbelt)){
-                        gpio_set_level(READY_LED,0);
-                        ready_led = 0;
-                    }
-                    if (ignition == true && executed == 1 && ready_led == 1){
-                        gpio_set_level(SUCCESS_LED, 1);
-                        gpio_set_level(READY_LED, 0);
-                        printf("Engine started!\n");
-                        executed = 2;
-                        started = true;
-                    }
+                if (ready_led == 0){
+                    gpio_set_level(READY_LED, 1);
+                    ready_led = 1;
+                }
+                if (ignition == true && executed == 1){
+                    gpio_set_level(SUCCESS_LED, 1);
+                    gpio_set_level(READY_LED, 0);
+                    printf("Engine started!\n");
+                    executed = 2;
                 }
             }
             else {
