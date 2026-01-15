@@ -1,62 +1,67 @@
 #include "freertos/FreeRTOS.h"
 #include "driver/gpio.h"
 
-#define DSEAT_PIN  GPIO_NUM_5
-#define PSEAT_PIN  GPIO_NUM_4
-#define DBELT_PIN  GPIO_NUM_7
-#define PBELT_PIN  GPIO_NUM_6
-#define IGNITION_BUTTON  GPIO_NUM_8
-#define READY_LED  GPIO_NUM_10
-#define SUCCESS_LED  GPIO_NUM_11
-#define ALARM_PIN GPIO_NUM_12
+#define DSEAT_PIN  GPIO_NUM_5       // driver seat button pin 5
+#define PSEAT_PIN  GPIO_NUM_4       // passenger seat button pin 4
+#define DBELT_PIN  GPIO_NUM_7       // driver belt switch pin 7
+#define PBELT_PIN  GPIO_NUM_6       // passenger belt switch pin 6
+#define IGNITION_BUTTON  GPIO_NUM_8 // ignition button pin 8
+#define READY_LED  GPIO_NUM_10      // ready LED pin 10
+#define SUCCESS_LED  GPIO_NUM_11    // success LED pin 11
+#define ALARM_PIN GPIO_NUM_12       // alarm pin 12
 
 bool dseat = false;  //Detects when the driver is seated 
 bool pseat = false;  //Detects when the passenger is seated
-bool dbelt = false;  //Detects when the drivers seatbelt is on
-bool pbelt = false;  //Detects when the passengers seatbelt is on
+bool dbelt = false;  //Detects when the driver seatbelt is on
+bool pbelt = false;  //Detects when the passenger seatbelt is on
 bool ignition = false; //Detects when the ignition is turned on
-bool success_led = false; //On if true, off if false
-bool alarm = false; //Buzz if true, quiet if false
 int executed = 0; //keep track of print statements
 int ready_led = 0; //keep track of whether ready_led should be on or off
 
 void app_main(void)
 {
+    // set driver seat pin config to input and internal pullup
     gpio_reset_pin(DSEAT_PIN);
     gpio_set_direction(DSEAT_PIN, GPIO_MODE_INPUT);
     gpio_pullup_en(DSEAT_PIN);
 
+    // set passenger seat pin config to input and internal pullup
     gpio_reset_pin(PSEAT_PIN);
     gpio_set_direction(PSEAT_PIN, GPIO_MODE_INPUT);
     gpio_pullup_en(PSEAT_PIN);
 
+    // set driver belt pin config to input and internal pullup
     gpio_reset_pin(DBELT_PIN);
     gpio_set_direction(DBELT_PIN, GPIO_MODE_INPUT);
     gpio_pullup_en(DBELT_PIN);
 
+    // set passenger belt pin config to input and internal pullup
     gpio_reset_pin(PBELT_PIN);
     gpio_set_direction(PBELT_PIN, GPIO_MODE_INPUT);
     gpio_pullup_en(PBELT_PIN);
 
+    // set ignition button config to input and internal pullup
     gpio_reset_pin(IGNITION_BUTTON);
     gpio_set_direction(IGNITION_BUTTON, GPIO_MODE_INPUT);
     gpio_pullup_en(IGNITION_BUTTON);
 
+    // set ready led pin config to output, level 0
     gpio_reset_pin(READY_LED);
     gpio_set_direction(READY_LED, GPIO_MODE_OUTPUT);
-    gpio_pullup_en(READY_LED);
 
+    // set success led pin config to output, level 0
     gpio_reset_pin(SUCCESS_LED);
     gpio_set_direction(SUCCESS_LED, GPIO_MODE_OUTPUT);
-    gpio_pullup_en(SUCCESS_LED);
 
+    // set alarm pin config to output, level 0
     gpio_reset_pin(ALARM_PIN);
     gpio_set_direction(ALARM_PIN, GPIO_MODE_OUTPUT);
-    gpio_pullup_en(ALARM_PIN);
 
     while (1){
+        // Task Delay to prevent watchdog
         vTaskDelay(100 / portTICK_PERIOD_MS);
 
+        // initialize variables
         dseat = gpio_get_level(DSEAT_PIN)==0;
         pseat = gpio_get_level(PSEAT_PIN)==0;
         dbelt = gpio_get_level(DBELT_PIN)==0;
