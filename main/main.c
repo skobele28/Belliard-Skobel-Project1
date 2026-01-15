@@ -61,39 +61,49 @@ void app_main(void)
         // Task Delay to prevent watchdog
         vTaskDelay(100 / portTICK_PERIOD_MS);
 
-        // initialize variables
+        // initialize variables in relation to GPIO pin inputs
         dseat = gpio_get_level(DSEAT_PIN)==0;
         pseat = gpio_get_level(PSEAT_PIN)==0;
         dbelt = gpio_get_level(DBELT_PIN)==0;
         pbelt = gpio_get_level(PBELT_PIN)==0;
         ignition = gpio_get_level(IGNITION_BUTTON)==0;
 
-
+        // if the driver seat button is pressed, print the welcome message once
         if (dseat){
             if (executed == 0){
                 printf("Welcome to enhanced alarm system model 218-W25 \n"); 
                 executed = 1;
             }
         }
+
+        // if all of the conditions are met
         if (dseat && pseat && dbelt && pbelt){
+            //set ready led to ON
             if (ready_led == 0){
                 gpio_set_level(READY_LED, 1);
                 ready_led = 1;
             }
+            // if ignition button is pressed while all conditions are met
             if (ignition == true && executed == 1){
+                // turn on ignition LED and turn off ready LED
                 gpio_set_level(SUCCESS_LED, 1);
                 gpio_set_level(READY_LED, 0);
+                // print engine started message once
                 printf("Engine started!\n");
                 executed = 2;
             }
         }
             
-        
+        // otherwise (at least one condition is not satisfied)
         else{
+            // set ready LED to OFF and set variable ready_led to 0
             gpio_set_level(READY_LED,0);
             ready_led = 0;
+            // if ignition button is pressed while conditions are not satisfied
             if (ignition==true){
+                    // turn on alarm buzzer
                     gpio_set_level(ALARM_PIN, 1);
+                    // check which conditions are not met, print corresponding message
                     if (!pseat){
                         printf("Passenger seat not occupied.\n");
                     }
