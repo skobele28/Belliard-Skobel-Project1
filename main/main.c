@@ -69,36 +69,21 @@ void app_main(void)
                 printf("Welcome to enhanced alarm system model 218-W25 \n"); 
                 executed = 1;
             }
-            if (pseat && dbelt && pbelt){
-                if (ready_led == 0){
-                    gpio_set_level(READY_LED, 1);
-                    ready_led = 1;
-                }
-                if (ignition == true && executed == 1){
-                    gpio_set_level(SUCCESS_LED, 1);
-                    gpio_set_level(READY_LED, 0);
-                    printf("Engine started!\n");
-                    executed = 2;
-                }
+        }
+        if (dseat && pseat && dbelt && pbelt){
+            if (ready_led == 0){
+                gpio_set_level(READY_LED, 1);
+                ready_led = 1;
             }
-            else {
+            if (ignition == true && executed == 1){
+                gpio_set_level(SUCCESS_LED, 1);
                 gpio_set_level(READY_LED, 0);
-                ready_led = 0;
-                if (ignition==true && executed == 1){
-                    gpio_set_level(ALARM_PIN, 1);
-                    if (!pseat){
-                        printf("Passenger seat not occupied.\n");
-                    }
-                    if (!pbelt){
-                        printf("Passenger seatbelt not fastened.\n");
-                    }
-                    if (!dbelt){
-                        printf("Drivers seatbelt not fastened.\n");
-                    }
-                    executed = 2;
-                }
+                printf("Engine started!\n");
+                executed = 2;
             }
         }
+            
+        
         else{
             gpio_set_level(READY_LED,0);
             ready_led = 0;
@@ -121,3 +106,4 @@ void app_main(void)
         }
     }
 }
+
