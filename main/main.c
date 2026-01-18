@@ -1,10 +1,10 @@
 #include "freertos/FreeRTOS.h"
 #include "driver/gpio.h"
 
-#define DSEAT_PIN  GPIO_NUM_5       // driver seat button pin 5
 #define PSEAT_PIN  GPIO_NUM_4       // passenger seat button pin 4
-#define DBELT_PIN  GPIO_NUM_7       // driver belt switch pin 7
+#define DSEAT_PIN  GPIO_NUM_5       // driver seat button pin 5
 #define PBELT_PIN  GPIO_NUM_6       // passenger belt switch pin 6
+#define DBELT_PIN  GPIO_NUM_7       // driver belt switch pin 7
 #define IGNITION_BUTTON  GPIO_NUM_8 // ignition button pin 8
 #define READY_LED  GPIO_NUM_10      // ready LED pin 10
 #define SUCCESS_LED  GPIO_NUM_11    // success LED pin 11
