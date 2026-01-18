@@ -79,7 +79,7 @@ void app_main(void)
         // if all of the conditions are met
         if (dseat && pseat && dbelt && pbelt){
             //set ready led to ON
-            if (ready_led == 0){
+            if (executed == 1 && ready_led == 0){
                 gpio_set_level(READY_LED, 1);
                 ready_led = 1;
             }
