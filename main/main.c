@@ -100,7 +100,7 @@ void app_main(void)
             gpio_set_level(READY_LED,0);
             ready_led = 0;
             // if ignition button is pressed while conditions are not satisfied
-            if (ignition==true){
+            if (ignition==true && executed != 2){
                     // turn on alarm buzzer
                     gpio_set_level(ALARM_PIN, 1);
                     // check which conditions are not met, print corresponding message
